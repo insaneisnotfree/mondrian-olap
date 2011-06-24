@@ -23,6 +23,10 @@ when 'postgresql'
 when 'oracle'
   require 'active_record/connection_adapters/oracle_enhanced_adapter'
   DATABASE_NAME = ENV['DATABASE_NAME'] || 'orcl'
+when 'sqlite'
+  require 'jdbc/sqlite'
+  JDBC_DRIVER = 'org.sqlite.JDBC'
+  DATABASE_NAME = ENV['DATABASE_NAME'] || 'mondrian_test'
 end
 
 puts "==> Using #{MONDRIAN_DRIVER} driver"
