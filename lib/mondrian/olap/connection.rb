@@ -72,6 +72,8 @@ module Mondrian
         when 'mysql', 'postgresql'
           "jdbc:#{@driver}://#{@params[:host]}#{@params[:port] && ":#{@params[:port]}"}/#{@params[:database]}" <<
           "?user=#{@params[:username]}&password=#{@params[:password]}"
+        when 'sqlite'
+          "jdbc:#{@driver}:#{@params[:path]}#{@params[:database]}"
         when 'oracle'
           # connection using TNS alias
           if @params[:database] && !@params[:host] && !@params[:url] && ENV['TNS_ADMIN']
@@ -90,6 +92,8 @@ module Mondrian
         case @driver
         when 'mysql'
           'com.mysql.jdbc.Driver'
+        when 'sqlite'
+          'org.sqlite.JDBC'
         when 'postgresql'
           'org.postgresql.Driver'
         when 'oracle'
